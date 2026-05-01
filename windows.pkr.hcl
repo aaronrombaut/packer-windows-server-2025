@@ -33,8 +33,7 @@ source "vsphere-iso" "windows" {
     disk_thin_provisioned = true
   }
 
-#  iso_paths = ["[YOUR_DATASTORE] iso/windows2025.iso"]
-  iso_paths = ["General Purpose/26100.32230.260111-0550.lt_release_svc_refresh_SERVER_EVAL_x64FRE_en-us.iso"]
+  iso_paths = ["[dml] 26100.32230.260111-0550.lt_release_svc_refresh_SERVER_EVAL_x64FRE_en-us.iso"]
 
   floppy_files = ["autounattend.xml"]
 
