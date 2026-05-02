@@ -67,11 +67,11 @@ PnpLockdown   = 1
 
 
 
+%Company%     = vmxnet3,NTamd64.6.2
 
 
 
 
-%Company%     = vmxnet3,NTamd64.10.0...26100
 
 
 
@@ -90,6 +90,9 @@ ExcludeFromSelect = *
 
 
 
+; Win 8 / Server 2012 for x64
+[vmxnet3.NTamd64.6.2]
+%loc.vmxnet3.DeviceDesc% = vmxnet3.ndis630.x64.ndi,   PCI\VEN_15AD&DEV_07B0
 
 
 
@@ -100,9 +103,37 @@ ExcludeFromSelect = *
 
 
 
-; Win Server 2025/Win11 24H2 x64
-[vmxnet3.NTamd64.10.0...26100]
-%loc.vmxnet3.DeviceDesc% = vmxnet3.ndis689.x64.ndi,   PCI\VEN_15AD&DEV_07B0
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -118,10 +149,10 @@ ExcludeFromSelect = *
 
 
 ;
-; NDIS6.89 x64
+; NDIS6.30 x64
 ;
 
-[vmxnet3.ndis689.x64.ndi.NT]
+[vmxnet3.ndis630.x64.ndi.NT]
 Characteristics    = 0x84
 BusType            = 5
 AddReg             = vmxnet3.ndis6.reg,vmxnet3.commonSettings.reg
@@ -129,7 +160,6 @@ AddReg             = vmxnet3.ndis6Settings.reg
 AddReg             = vmxnet3.ndis620Settings.reg
 AddReg             = vmxnet3.ndis630Settings.reg
 AddReg             = rss.reg, vmxnet3.ndis620RssSettings.reg
-AddReg             = vmxnet3.ndis689Settings.reg
 ; AddReg             = vmxnet3.advancedSettings.reg
 DelReg             = Pre620RssSettings.remove.reg
 DelReg             = OldAdaptiveRing.remove.reg
@@ -138,50 +168,20 @@ CopyFiles          = vmxnet3.CopyFiles
 *MediaType         = 0		; NdisMedium802_3
 *PhysicalMediaType = 14		; NdisPhysicalMedium802_3
 
-[vmxnet3.ndis689.x64.ndi.NT.HW]
-; To reduce I/O resource usage in Windows 10,  use this entry:
-Include            = pci.inf
-Needs              = PciIoSpaceNotRequired.HW
+[vmxnet3.ndis630.x64.ndi.NT.HW]
+
+; To reduce I/O resource usage in Windows 8.1 and earlier, use this entry:
+Include            = machine.inf
+Needs              = PciIoSpaceNotRequired
+
+
+
+
+
 AddReg             = enableMSI.reg
 
-[vmxnet3.ndis689.x64.ndi.NT.Services]
+[vmxnet3.ndis630.x64.ndi.NT.Services]
 AddService = vmxnet3ndis6, 2, vmxnet3.ndis6.x64.Service, common.EventLog
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -409,21 +409,21 @@ HKR, Ndi\params\RxDepth, Max,       0, "128"
 HKR, Ndi\params\RxDepth, Step,      0, "1"
 
 
-[vmxnet3.ndis689Settings.reg]
 
-HKR, Ndi\params\*NdisPoll, ParamDesc, 0, %NdisPoll%
-HKR, Ndi\params\*NdisPoll, Type,      0, "enum"
-HKR, Ndi\params\*NdisPoll, Default,   0, "1"
-HKR, Ndi\params\*NdisPoll, Optional,  0, "0"
-HKR, Ndi\params\*NdisPoll\enum, "0",  0, %Disabled%
-HKR, Ndi\params\*NdisPoll\enum, "1",  0, %Enabled%
 
-HKR, Ndi\params\*DefaultPollOnly, ParamDesc, 0, %DefaultPollOnly%
-HKR, Ndi\params\*DefaultPollOnly, Type,      0, "enum"
-HKR, Ndi\params\*DefaultPollOnly, Default,   0, "0"
-HKR, Ndi\params\*DefaultPollOnly, Optional,  0, "1"
-HKR, Ndi\params\*DefaultPollOnly\enum, "0",  0, %Disabled%
-HKR, Ndi\params\*DefaultPollOnly\enum, "1",  0, %Enabled%
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ;
 ; Pre-NDIS 6.20 uses 'MaxRxQueues' to constrain the
