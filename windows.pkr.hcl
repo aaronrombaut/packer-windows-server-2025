@@ -21,13 +21,15 @@ source "vsphere-iso" "windows" {
   guest_os_type        = "windows9Server64Guest"
 
   CPUs                 = 2
-  RAM                  = 4096
+  RAM                  = 8192
 
   network_adapters {
     network = "dvPG-VLAN107-VM Management"
+    network_card = "vmxnet3"
   }
 
-  disk_controller_type = ["lsilogic-sas"]
+  disk_controller_type = ["pvscsi"]
+  pvscsi_boot = true
   storage {
     disk_size             = 40960
     disk_thin_provisioned = true
@@ -35,7 +37,10 @@ source "vsphere-iso" "windows" {
 
   iso_paths = ["[dml] 26100.32230.260111-0550.lt_release_svc_refresh_SERVER_EVAL_x64FRE_en-us.iso"]
 
-  floppy_files = ["autounattend.xml"]
+  floppy_files = ["/home/arombaut/packer/.../autounattend.xml"]
+
+  tools_mode          = "attach"
+  tools_source_path  = "/home/arombaut/packer/.../vmware-tools.iso"
 
   communicator = "winrm"
   winrm_username = "Administrator"
@@ -44,4 +49,12 @@ source "vsphere-iso" "windows" {
 
 build {
   sources = ["source.vsphere-iso.windows"]
+}
+
+provisioner "powershell" {
+  inline = [
+    "$drive = (Get-Volume | Where-Object { $_.DriveType -eq 'CD-ROM' -and (Test-Path \"$($_.DriveLetter):\\setup64.exe\") } | Select-Object -First 1).DriveLetter",
+    "if (-not $drive) { throw 'VMware Tools ISO not found' }",
+    "Start-Process \"$drive:\\setup64.exe\" -ArgumentList '/S /v\"/qn REBOOT=R\"' -Wait"
+  ]
 }
