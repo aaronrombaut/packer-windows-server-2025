@@ -11,17 +11,24 @@ source "vsphere-iso" "windows" {
   vcenter_server       = "vcsa-v107-10.lab.aaronrombaut.com"
   username             = "administrator@vsphere.local"
   password             = "IT$h0uldB$3cure!"
-  insecure_connection  = true
+  insecure_connection  = false
 
   datacenter           = "New York"
   cluster              = "Home Lab Cluster"
   datastore            = "virtual-machines"
 
   vm_name              = "win2025-test"
-  guest_os_type        = "windows9Server64Guest"
+  guest_os_type        = "windows2019srvNext_64Guest"
 
   CPUs                 = 2
   RAM                  = 8192
+
+  firmware             = "efi-secure"
+  vm_version           = 19
+  boot_wait             = "3s"
+  boot_command = [
+    "<space>"
+  ]
 
   network_adapters {
     network = "dvPG-VLAN107-VM Management"
@@ -37,8 +44,8 @@ source "vsphere-iso" "windows" {
   iso_paths = ["[dml] 26100.32230.260111-0550.lt_release_svc_refresh_SERVER_EVAL_x64FRE_en-us.iso"]
 
   cd_files = [
-    "/home/arombaut/packer/packer-windows-server-2025/autounattend.xml",
-    "/home/arombaut/packer/packer-windows-server-2025/cd/*"
+    "/home/arombaut/packer/packer-windows-server-2025/autounattend.xml"
+#    "/home/arombaut/packer/packer-windows-server-2025/cd/*"
   ]
 
   communicator = "winrm"
