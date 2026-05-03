@@ -74,7 +74,7 @@
             <FirstLogonCommands>
                 <SynchronousCommand wcm:action="add">
                     <Order>1</Order>
-                    <CommandLine>powershell -ExecutionPolicy Bypass -File E:\scripts\enable-winrm.ps1</CommandLine>
+                    <CommandLine>powershell -ExecutionPolicy Bypass -File E:\scripts\bootstrap.ps1</CommandLine>
                 </SynchronousCommand>
             </FirstLogonCommands>
             <OOBE>
