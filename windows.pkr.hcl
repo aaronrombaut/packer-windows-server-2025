@@ -59,9 +59,9 @@ source "vsphere-iso" "windows" {
 build {
   sources = ["source.vsphere-iso.windows"]
 
-  provisioner "powershell" {
+/*   provisioner "powershell" {
     inline = [
       "powershell -ExecutionPolicy Bypass -File E:\\scripts\\bootstrap.ps1"
     ]
-  }
+  } */
 }
