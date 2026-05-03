@@ -41,11 +41,14 @@ source "vsphere-iso" "windows" {
     disk_thin_provisioned = true
   }
 
-  iso_paths = ["[dml] 26100.32230.260111-0550.lt_release_svc_refresh_SERVER_EVAL_x64FRE_en-us.iso"]
+  iso_paths = [
+    "[dml] 26100.32230.260111-0550.lt_release_svc_refresh_SERVER_EVAL_x64FRE_en-us.iso",
+    "[dml] VMware-tools-windows-13.0.10-25056151.iso"
+  ]
 
   cd_files = [
-    "/home/arombaut/packer/packer-windows-server-2025/autounattend.xml"
-#    "/home/arombaut/packer/packer-windows-server-2025/cd/*"
+    "/home/arombaut/packer/packer-windows-server-2025/autounattend.xml",
+    "/home/arombaut/packer/packer-windows-server-2025/cd/*"
   ]
 
   communicator = "winrm"
@@ -55,4 +58,10 @@ source "vsphere-iso" "windows" {
 
 build {
   sources = ["source.vsphere-iso.windows"]
+
+  provisioner "powershell" {
+    inline = [
+      "powershell -ExecutionPolicy Bypass -File E:\\scripts\\bootstrap.ps1"
+    ]
+  }
 }
