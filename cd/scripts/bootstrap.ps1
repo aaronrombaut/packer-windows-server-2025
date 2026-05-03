@@ -3,12 +3,9 @@ Start-Transcript -Path C:\Windows\Temp\bootstrap.log -Force
 # Wait for network
 Start-Sleep -Seconds 20
 
-# Set to Private (retry loop)
-for ($i=0; $i -lt 5; $i++) {
-  Get-NetConnectionProfile | ForEach-Object {
-    Set-NetConnectionProfile -InterfaceIndex $_.InterfaceIndex -NetworkCategory Private -ErrorAction SilentlyContinue
-  }
-  Start-Sleep -Seconds 5
+# Set to Private
+Get-NetConnectionProfile | ForEach-Object {
+  Set-NetConnectionProfile -InterfaceIndex $_.InterfaceIndex -NetworkCategory Private -ErrorAction SilentlyContinue
 }
 
 # Enable WinRM
@@ -23,3 +20,5 @@ $tools = Get-Volume | Where-Object {
 if ($tools) {
   Start-Process "$($tools.DriveLetter):\setup.exe" -ArgumentList '/S /v"/qn REBOOT=R"' -Wait
 }
+
+Restart-Computer -Force
