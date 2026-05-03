@@ -1,24 +1,21 @@
-Start-Transcript -Path C:\Windows\Temp\bootstrap.log -Force
+$flag = "C:\Windows\Temp\bootstrap.step"
 
-# Wait for network
-Start-Sleep -Seconds 20
-
-# Set to Private
-Get-NetConnectionProfile | ForEach-Object {
-  Set-NetConnectionProfile -InterfaceIndex $_.InterfaceIndex -NetworkCategory Private -ErrorAction SilentlyContinue
+if (!(Test-Path $flag)) {
+  "step1" | Out-File $flag -Force
 }
 
-# Enable WinRM
-winrm quickconfig -quiet
-Enable-NetFirewallRule -DisplayGroup "Windows Remote Management"
+$step = Get-Content $flag
 
-# Install VMware Tools
-$tools = Get-Volume | Where-Object {
-  $_.DriveType -eq 'CD-ROM' -and (Test-Path "$($_.DriveLetter):\setup.exe")
-} | Select-Object -First 1
-
-if ($tools) {
-  Start-Process "$($tools.DriveLetter):\setup.exe" -ArgumentList '/S /v"/qn REBOOT=R"' -Wait
+if ($step -eq "step1") {
+  powershell -ExecutionPolicy Bypass -File E:\scripts\install-vmware-tools.ps1
+  "step2" | Out-File $flag -Force
+  Restart-Computer -Force
+  exit
 }
 
-Restart-Computer -Force
+if ($step -eq "step2") {
+  powershell -ExecutionPolicy Bypass -File E:\scripts\enable-winrm.ps1
+  "done" | Out-File $flag -Force
+  Restart-Computer -Force
+  exit
+}
