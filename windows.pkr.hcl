@@ -25,7 +25,7 @@ source "vsphere-iso" "windows" {
 
   firmware             = "efi-secure"
   vm_version           = 19
-  boot_wait             = "3s"
+  boot_wait            = "3s"
   boot_command = [
     "<enter>"
   ]
