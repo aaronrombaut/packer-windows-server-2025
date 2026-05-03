@@ -27,7 +27,7 @@ source "vsphere-iso" "windows" {
   vm_version           = 19
   boot_wait             = "3s"
   boot_command = [
-    "<space>"
+    "<enter>"
   ]
 
   network_adapters {
@@ -35,7 +35,7 @@ source "vsphere-iso" "windows" {
     network_card = "vmxnet3"
   }
   ip_wait_timeout = "0s"
-  ip_settle_timeout = "1m"
+#  ip_settle_timeout = "1m"
 
   disk_controller_type = ["pvscsi"]
   storage {
