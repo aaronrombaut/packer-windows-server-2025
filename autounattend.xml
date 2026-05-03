@@ -74,7 +74,8 @@
             <FirstLogonCommands>
                 <SynchronousCommand wcm:action="add">
                     <Order>1</Order>
-                    <CommandLine>powershell -ExecutionPolicy Bypass -File E:\scripts\bootstrap.ps1</CommandLine>
+                    <CommandLine>powershell -ExecutionPolicy Bypass -Command &quot;Get-Volume | Where-Object { Test-Path ($_.DriveLetter + &apos;:\scripts\firstlogon.ps1&apos;) } | Select-Object -First 1 | ForEach-Object { powershell -ExecutionPolicy Bypass -File ($_.DriveLetter + &apos;:\scripts\bootstrap.ps1&apos;) }&quot;</CommandLine>
+                    <Description>PowerShell Script to bootstrap the system</Description>
                 </SynchronousCommand>
             </FirstLogonCommands>
             <OOBE>
