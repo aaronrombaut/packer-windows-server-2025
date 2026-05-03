@@ -74,7 +74,7 @@
             <FirstLogonCommands>
                 <SynchronousCommand wcm:action="add">
                     <Order>1</Order>
-                    <CommandLine>powershell -ExecutionPolicy Bypass -Command  "F:\scripts\bootstrap.ps1"</CommandLine>
+                    <CommandLine>powershell -ExecutionPolicy Bypass -Command  &quot;F:\scripts\bootstrap.ps1&quot;</CommandLine>
                     <Description>PowerShell Script to bootstrap the system</Description>
                 </SynchronousCommand>
             </FirstLogonCommands>
@@ -88,6 +88,15 @@
                     <PlainText>false</PlainText>
                 </AdministratorPassword>
             </UserAccounts>
+            <AutoLogon>
+                <Password>
+                    <Value>YwBoAGEAbgBnAG0AZQBQAGEAcwBzAHcAbwByAGQA</Value>
+                    <PlainText>false</PlainText>
+                </Password>
+                <Enabled>true</Enabled>
+                <LogonCount>3</LogonCount>
+                <Username>Administrator</Username>
+            </AutoLogon>
         </component>
     </settings>
     <cpi:offlineImage cpi:source="wim:c:/windows-imaging-working-dir/install.wim#Windows Server 2025 SERVERDATACENTER" xmlns:cpi="urn:schemas-microsoft-com:cpi" />
