@@ -16,5 +16,5 @@ $tools = Get-Volume | Where-Object {
 } | Select-Object -First 1
 
 if ($tools) {
-  Start-Process "$($tools.DriveLetter):\setup64.exe" -ArgumentList '/S /v"/qn REBOOT=R"' -Wait
+  Start-Process "$($tools.DriveLetter):\setup.exe" -ArgumentList '/S /v"/qn REBOOT=R"' -Wait
 }
