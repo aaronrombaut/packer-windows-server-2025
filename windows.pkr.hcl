@@ -34,6 +34,8 @@ source "vsphere-iso" "windows" {
     network = "dvPG-VLAN107-VM Management"
     network_card = "vmxnet3"
   }
+  ip_wait_timeout = "0s"
+  ip_settle_timeout = "1m"
 
   disk_controller_type = ["pvscsi"]
   storage {
