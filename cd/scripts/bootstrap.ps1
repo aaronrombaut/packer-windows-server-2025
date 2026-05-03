@@ -1,3 +1,5 @@
+Start-Transcript -Path C:\Windows\Temp\bootstrap.log -Force
+
 # Wait for network
 Start-Sleep -Seconds 20
 
