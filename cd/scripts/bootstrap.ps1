@@ -14,7 +14,7 @@ Enable-NetFirewallRule -DisplayGroup "Windows Remote Management"
 
 # Install VMware Tools
 $tools = Get-Volume | Where-Object {
-  $_.DriveType -eq 'CD-ROM' -and (Test-Path "$($_.DriveLetter):\setup64.exe")
+  $_.DriveType -eq 'CD-ROM' -and (Test-Path "$($_.DriveLetter):\setup.exe")
 } | Select-Object -First 1
 
 if ($tools) {
