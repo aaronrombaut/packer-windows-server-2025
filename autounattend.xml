@@ -75,7 +75,7 @@
                 <SynchronousCommand wcm:action="add">
                     <Order>1</Order>
                     <CommandLine>powershell.exe -ExecutionPolicy Bypass -File &quot;F:\scripts\bootstrap.ps1&quot;</CommandLine>
-                    <Description>Bootstrap VM for Packer: WinRM and VMware Tools</Description>
+                    <Description>Bootstrap VM</Description>
                     <RequiresUserInput>false</RequiresUserInput>
                 </SynchronousCommand>
             </FirstLogonCommands>
