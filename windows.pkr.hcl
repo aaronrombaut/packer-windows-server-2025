@@ -23,6 +23,8 @@ source "vsphere-iso" "windows" {
   CPUs                 = 2
   RAM                  = 8192
 
+  video_ram            = 256
+  
   firmware             = "efi-secure"
   vm_version           = 19
   boot_wait            = "3s"
