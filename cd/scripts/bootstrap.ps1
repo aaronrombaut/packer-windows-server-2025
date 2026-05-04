@@ -5,7 +5,7 @@ Start-Transcript -Path "$LogDir\bootstrap.log" -Force
 Write-Host "Starting bootstrap..."
 
 powershell.exe -ExecutionPolicy Bypass -File F:\scripts\enable-winrm.ps1
-powershell.exe -ExecutionPolicy Bypass -File F:\scripts\install-vmware-tools.ps1
+# powershell.exe -ExecutionPolicy Bypass -File F:\scripts\install-vmware-tools.ps1
 
 Write-Host "Bootstrap complete. Rebooting..."
 Stop-Transcript
