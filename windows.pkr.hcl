@@ -8,16 +8,16 @@ packer {
 }
 
 source "vsphere-iso" "windows" {
-  vcenter_server       = "vcsa-v107-10.lab.aaronrombaut.com"
-  username             = "administrator@vsphere.local"
-  password             = "IT$h0uldB$3cure!"
+  vcenter_server       = var.vcenter_server
+  username             = var.vcenter_username
+  password             = var.vcenter_password
   insecure_connection  = false
 
-  datacenter           = "New York"
-  cluster              = "Home Lab Cluster"
-  datastore            = "virtual-machines"
+  datacenter           = var.datacenter
+  cluster              = var.cluster
+  datastore            = var.datastore
 
-  vm_name              = "win2025-test"
+  vm_name              = var.vm_name
   guest_os_type        = "windows2019srvNext_64Guest"
 
   CPUs                 = 2
@@ -33,7 +33,7 @@ source "vsphere-iso" "windows" {
   ]
 
   network_adapters {
-    network = "dvPG-VLAN107-VM Management"
+    network = var.network
     network_card = "vmxnet3"
   }
 
@@ -56,8 +56,8 @@ source "vsphere-iso" "windows" {
   communicator = "winrm"
   winrm_insecure = true
   winrm_use_ssl = false
-  winrm_username = "Administrator"
-  winrm_password = "changeme123!"
+  winrm_username = var.winrm_username
+  winrm_password = var.winrm_password
   winrm_timeout = "30m"
 }
 
