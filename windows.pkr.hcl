@@ -23,7 +23,7 @@ source "vsphere-iso" "windows" {
   CPUs                 = 2
   RAM                  = 8192
 
-  video_ram            = 256
+  video_ram            = 256000
   
   firmware             = "efi-secure"
   vm_version           = 19
@@ -54,8 +54,11 @@ source "vsphere-iso" "windows" {
   ]
 
   communicator = "winrm"
+  winrm_insecure = true
+  winrm_use_ssl = false
   winrm_username = "Administrator"
   winrm_password = "YourPasswordHere"
+  winrm_timeout = "30m"
 }
 
 build {
