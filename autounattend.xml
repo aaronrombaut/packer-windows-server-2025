@@ -84,13 +84,13 @@
             </OOBE>
             <UserAccounts>
                 <AdministratorPassword>
-                    <Value>YwBoAGEAbgBnAGUAbQBlAEEAZABtAGkAbgBpAHMAdAByAGEAdABvAHIAUABhAHMAcwB3AG8AcgBkAA==</Value>
+                    <Value>YwBoAGEAbgBnAGUAbQBlADEAMgAzACEAQQBkAG0AaQBuAGkAcwB0AHIAYQB0AG8AcgBQAGEAcwBzAHcAbwByAGQA</Value>
                     <PlainText>false</PlainText>
                 </AdministratorPassword>
             </UserAccounts>
             <AutoLogon>
                 <Password>
-                    <Value>YwBoAGEAbgBnAG0AZQBQAGEAcwBzAHcAbwByAGQA</Value>
+                    <Value>YwBoAGEAbgBnAGUAbQBlADEAMgAzACEAUABhAHMAcwB3AG8AcgBkAA==</Value>
                     <PlainText>false</PlainText>
                 </Password>
                 <Enabled>true</Enabled>
