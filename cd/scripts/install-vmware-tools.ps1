@@ -4,4 +4,7 @@ $tools = Get-Volume | Where-Object {
 
 if (-not $tools) { throw "VMware Tools ISO not found" }
 
-Start-Process "$($tools.DriveLetter):\setup.exe" -ArgumentList '/S /v"/qn REBOOT=R"' -Wait
+if ($tools) {
+#  Start-Process -FilePath "$($tools.DriveLetter):\setup.exe" -ArgumentList "/s","/v/qn" -Wait
+  cmd.exe /c "$($tools.DriveLetter):\setup.exe /s /v/qn"
+}
