@@ -74,20 +74,8 @@
             <FirstLogonCommands>
                 <SynchronousCommand wcm:action="add">
                     <Order>1</Order>
-                    <CommandLine>powershell -ExecutionPolicy Bypass -Command  &quot;F:\scripts\enable-winrm.ps1&quot;</CommandLine>
-                    <Description>Enable WinRM on the system for Packer</Description>
-                    <RequiresUserInput>false</RequiresUserInput>
-                </SynchronousCommand>
-                <SynchronousCommand wcm:action="add">
-                    <Order>2</Order>
-                    <Description>Install VMware Tools</Description>
-                    <CommandLine>cmd.exe /c &quot;E:\setup.exe /s /v/qn&quot;</CommandLine>
-                    <RequiresUserInput>false</RequiresUserInput>
-                </SynchronousCommand>
-                <SynchronousCommand wcm:action="add">
-                    <Order>3</Order>
-                    <CommandLine>powershell.exe -Command &quot;Restart-Computer&quot; -Force</CommandLine>
-                    <Description>Restart the server.</Description>
+                    <CommandLine>powershell.exe -ExecutionPolicy Bypass -File &quot;F:\scripts\bootstrap.ps1&quot;</CommandLine>
+                    <Description>Bootstrap VM for Packer: WinRM and VMware Tools</Description>
                     <RequiresUserInput>false</RequiresUserInput>
                 </SynchronousCommand>
             </FirstLogonCommands>
@@ -107,7 +95,7 @@
                     <PlainText>false</PlainText>
                 </Password>
                 <Enabled>true</Enabled>
-                <LogonCount>3</LogonCount>
+                <LogonCount>1</LogonCount>
                 <Username>Administrator</Username>
             </AutoLogon>
         </component>
