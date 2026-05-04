@@ -33,4 +33,4 @@ network    = "dvPG-VLAN107-VM Management"
 vm_name = "win2025-test"
 
 winrm_username = "Administrator"
-winrm_password = "changeme123!"
+winrm_password = "changeme123!" 
