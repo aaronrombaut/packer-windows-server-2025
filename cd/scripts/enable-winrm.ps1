@@ -1,17 +1,38 @@
-Start-Sleep -Seconds 5
+$LogDir = "C:\Windows\Temp\Packer"
+New-Item -ItemType Directory -Path $LogDir -Force | Out-Null
+Start-Transcript -Path "$LogDir\enable-winrm.log" -Force
+
+$ErrorActionPreference = "Continue"
+
+Write-Host "Starting WinRM configuration..."
 
 Get-NetConnectionProfile | ForEach-Object {
-  Set-NetConnectionProfile -InterfaceIndex $_.InterfaceIndex -NetworkCategory Private -ErrorAction SilentlyContinue
+    Write-Host "Setting network profile to Private: $($_.Name)"
+    Set-NetConnectionProfile -InterfaceIndex $_.InterfaceIndex -NetworkCategory Private -ErrorAction SilentlyContinue
 }
 
-Start-Sleep -Seconds 5
+Enable-PSRemoting -Force
 
-winrm quickconfig -quiet
+Set-Service WinRM -StartupType Automatic
+Start-Service WinRM
 
-New-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" `
-  -Name "LocalAccountTokenFilterPolicy" -Value 1 -PropertyType DWord -Force
+New-ItemProperty `
+  -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" `
+  -Name "LocalAccountTokenFilterPolicy" `
+  -Value 1 `
+  -PropertyType DWord `
+  -Force
+
+winrm set winrm/config/service/auth '@{Basic="true"}'
+winrm set winrm/config/service '@{AllowUnencrypted="true"}'
 
 Enable-NetFirewallRule -DisplayGroup "Windows Remote Management"
+Enable-NetFirewallRule -DisplayGroup "File and Printer Sharing"
 
-winrm set winrm/config/service/auth @{Basic="true"}
-winrm set winrm/config/service @{AllowUnencrypted="true"}
+Write-Host "WinRM listener:"
+winrm enumerate winrm/config/listener
+
+Write-Host "Port 5985:"
+netstat -an | findstr 5985
+
+Stop-Transcript

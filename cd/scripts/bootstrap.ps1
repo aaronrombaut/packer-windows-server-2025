@@ -1,21 +1,13 @@
-$flag = "C:\Windows\Temp\bootstrap.step"
+$LogDir = "C:\Windows\Temp\Packer"
+New-Item -ItemType Directory -Path $LogDir -Force | Out-Null
+Start-Transcript -Path "$LogDir\bootstrap.log" -Force
 
-if (!(Test-Path $flag)) {
-  "step1" | Out-File $flag -Force
-}
+Write-Host "Starting bootstrap..."
 
-$step = Get-Content $flag
+powershell.exe -ExecutionPolicy Bypass -File F:\scripts\enable-winrm.ps1
+powershell.exe -ExecutionPolicy Bypass -File F:\scripts\install-vmware-tools.ps1
 
-if ($step -eq "step1") {
-  powershell -ExecutionPolicy Bypass -File F:\scripts\install-vmware-tools.ps1
-  "step2" | Out-File $flag -Force
-  Restart-Computer -Force
-  exit
-}
+Write-Host "Bootstrap complete. Rebooting..."
+Stop-Transcript
 
-if ($step -eq "step2") {
-  powershell -ExecutionPolicy Bypass -File F:\scripts\enable-winrm.ps1
-  "done" | Out-File $flag -Force
-  Restart-Computer -Force
-  exit
-}
+Restart-Computer -Force
