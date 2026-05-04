@@ -1,4 +1,4 @@
-Start-Sleep -Seconds 20
+Start-Sleep -Seconds 5
 
 Get-NetConnectionProfile | ForEach-Object {
   Set-NetConnectionProfile -InterfaceIndex $_.InterfaceIndex -NetworkCategory Private -ErrorAction SilentlyContinue
