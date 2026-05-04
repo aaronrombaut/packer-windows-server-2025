@@ -74,8 +74,8 @@
             <FirstLogonCommands>
                 <SynchronousCommand wcm:action="add">
                     <Order>2</Order>
-                    <CommandLine>powershell -ExecutionPolicy Bypass -Command  &quot;F:\scripts\bootstrap.ps1&quot;</CommandLine>
-                    <Description>PowerShell Script to bootstrap the system</Description>
+                    <CommandLine>powershell -ExecutionPolicy Bypass -Command  &quot;F:\scripts\enable-winrm.ps1&quot;</CommandLine>
+                    <Description>Enable WinRM on the system for Packer</Description>
                     <RequiresUserInput>false</RequiresUserInput>
                 </SynchronousCommand>
                 <SynchronousCommand wcm:action="add">
