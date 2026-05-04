@@ -100,5 +100,17 @@
             </AutoLogon>
         </component>
     </settings>
+    <settings pass="specialize">
+        <component name="Microsoft-Windows-Deployment" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <RunSynchronous>
+                <RunSynchronousCommand wcm:action="add">
+                    <Description>Install VMware Tools</Description>
+                    <Order>1</Order>
+                    <Path>F:\scripts\install-vmware-tools.cmd</Path>
+                    <WillReboot>Always</WillReboot>
+                </RunSynchronousCommand>
+            </RunSynchronous>
+        </component>
+    </settings>
     <cpi:offlineImage cpi:source="wim:c:/windows-imaging-working-dir/install.wim#Windows Server 2025 SERVERDATACENTER" xmlns:cpi="urn:schemas-microsoft-com:cpi" />
 </unattend>
