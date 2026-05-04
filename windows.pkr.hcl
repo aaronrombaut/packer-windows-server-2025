@@ -57,7 +57,7 @@ source "vsphere-iso" "windows" {
   winrm_insecure = true
   winrm_use_ssl = false
   winrm_username = "Administrator"
-  winrm_password = "YourPasswordHere"
+  winrm_password = "changeme"
   winrm_timeout = "30m"
 }
 
