@@ -10,4 +10,4 @@ powershell.exe -ExecutionPolicy Bypass -File F:\scripts\enable-winrm.ps1
 Write-Host "Bootstrap complete. Rebooting..."
 Stop-Transcript
 
-Restart-Computer -Force
+# Restart-Computer -Force
