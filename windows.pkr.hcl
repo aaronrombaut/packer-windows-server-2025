@@ -74,7 +74,9 @@ build {
     extra_arguments = [
       "-e", "ansible_connection=winrm",
       "-e", "ansible_winrm_transport=basic",
-      "-e", "ansible_winrm_server_cert_validation=ignore"
+      "-e", "ansible_winrm_server_cert_validation=ignore",
+      "-e", "ansible_user=Administrator",
+      "-e", "ansible_password=${var.winrm_password}"
     ]
   }
 }
