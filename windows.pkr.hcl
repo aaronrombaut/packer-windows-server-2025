@@ -64,9 +64,13 @@ source "vsphere-iso" "windows" {
 build {
   sources = ["source.vsphere-iso.windows"]
 
-/*   provisioner "powershell" {
-    inline = [
-      "powershell -ExecutionPolicy Bypass -File E:\\scripts\\bootstrap.ps1"
+  provisioner "ansible" {
+    playbook_file = "ansible/playbooks/test.yaml"
+    
+    extra_arguments = [
+      "-e", "ansible_connection=winrm",
+      "-e", "ansible_winrm_transport=basic",
+      "-e", "ansible_winrm_server_cert_validation=ignore"
     ]
-  } */
+  }
 }
