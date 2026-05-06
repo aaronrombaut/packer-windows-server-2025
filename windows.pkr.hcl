@@ -69,6 +69,7 @@ build {
   sources = ["source.vsphere-iso.windows"]
 
   provisioner "ansible" {
+    use_proxy = false
     playbook_file = "ansible/playbooks/test.yaml"
     
     extra_arguments = [
